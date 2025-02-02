@@ -20,6 +20,59 @@ LV2<-function(r1,r2,N1,N2,a12,a21,K1,K2,G=100){
 }
 
 
+###ECD effects on K
+r1<-0.2
+r2<-0.18
+N1<-5
+N2<-5
+a12<-0.1
+a21<-0.1
+K1<-50
+K2<-60
+
+
+r.out1<-LV2(r1,r2,N1,N2,a12,a21,K1,K2)
+
+quartz()
+par(mfrow=c(1,2))
+plot(1:nrow(r.out1),r.out1$Total,ylim=c(0,max(r.out1$Total)),
+     type="l", lwd=3,col="grey70", xlab="Time",ylab="Abundance",
+     main = "a) ECD decreases K",cex.lab=1.5,cex.main=1.5)
+points(1:nrow(r.out1),r.out1$out.N1,type="l", lwd=3,col="grey70")
+points(1:nrow(r.out1),r.out1$out.N2,type="l", lwd=3,col="grey70")
+
+##ECD effects on K - decrease
+K1<-30
+K2<-35
+r.out1.L<-LV2(r1,r2,N1,N2,a12,a21,K1,K2)
+
+points(1:nrow(r.out1.L),r.out1.L$Total,type="l", lwd=3,col="darkslategray")
+points(1:nrow(r.out1.L),r.out1.L$out.N1,type="l", lwd=3,col="darkslategray4")
+points(1:nrow(r.out1.L),r.out1.L$out.N2,type="l", lwd=3,col="darkslategray3")
+
+text(70,65,pos=4,"Total",col="darkslategray")
+text(70,35,pos=4,"Species 2",col="darkslategray3")
+text(70,20,pos=4,"Species 1",col="darkslategray4")
+
+
+###ECD effects on K -increase
+K1<-70
+K2<-85
+
+r.out1.H<-LV2(r1,r2,N1,N2,a12,a21,K1,K2)
+
+plot(1:nrow(r.out1),r.out1$Total,
+     type="l", lwd=3,col="grey70", xlab="Time",ylab="Abundance",
+     main = "b) ECD increases K",ylim=c(0,K1+K2),cex.lab=1.5,cex.main=1.5)
+points(1:nrow(r.out1),r.out1$out.N1,type="l", lwd=3,col="grey70")
+points(1:nrow(r.out1),r.out1$out.N2,type="l", lwd=3,col="grey70")
+
+
+points(1:nrow(r.out1.H),r.out1.H$Total,type="l", lwd=3,col="darkslategray")
+points(1:nrow(r.out1.H),r.out1.H$out.N1,type="l", lwd=3,col="darkslategray4")
+points(1:nrow(r.out1.H),r.out1.H$out.N2,type="l", lwd=3,col="darkslategray3")
+
+
 ###ECD effects on r -lower
 r1<-0.2
 r2<-0.18
@@ -37,7 +90,7 @@ quartz()
 par(mfrow=c(1,3))
 plot(1:nrow(r.out1),r.out1$Total,ylim=c(0,max(r.out1$Total)),
      type="l", lwd=3,col="grey70", xlab="Time",ylab="Abundance",
-     main = "a) ECD decreases r",cex.lab=1.5,cex.main=1.5)
+     main = "A) ECD decreases r",cex.lab=1.5,cex.main=1.5)
 points(1:nrow(r.out1),r.out1$out.N1,type="l", lwd=3,col="grey70")
 points(1:nrow(r.out1),r.out1$out.N2,type="l", lwd=3,col="grey70")
 
@@ -68,7 +121,7 @@ r.out1.H<-LV2(r1,r2,N1,N2,a12,a21,K1,K2)
 
 plot(1:nrow(r.out1),r.out1$Total,
      type="l", lwd=3,col="grey70", xlab="Time",ylab="Abundance",
-     main = "b) ECD increases r",ylim=c(0,130),cex.lab=1.5,cex.main=1.5)
+     main = "B) ECD increases r",ylim=c(0,130),cex.lab=1.5,cex.main=1.5)
 points(1:nrow(r.out1),r.out1$out.N1,type="l", lwd=3,col="grey70")
 points(1:nrow(r.out1),r.out1$out.N2,type="l", lwd=3,col="grey70")
 
@@ -96,7 +149,7 @@ CVs2<-CVs[CVs!=-Inf]
 plot(rs[CVs!=-Inf],CVs2, type="l", lwd=3,col="darkslategray",
      ylab="Coefficient of variation",
      xlab="Intrinsic rate of increase",
-     main="c) Coefficient of variation",cex.lab=1.5,cex.main=1.5)
+     main="C) Coefficient of variation",cex.lab=1.5,cex.main=1.5)
 
 
 
